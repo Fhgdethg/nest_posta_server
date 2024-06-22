@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { hash } from 'bcrypt';
+// import { hash } from 'bcrypt';
 
 import { User } from '@entities/user/user.entity';
-import { UpdateUserDto } from '@entities/user/dto/updateUser.dto';
+// import { UpdateUserDto } from '@entities/user/dto/updateUser.dto';
 
 @Injectable()
 export class UserService {
@@ -13,15 +13,14 @@ export class UserService {
   ) {}
 
   async createUser(userData: any) {
-    const hashedPassword = await hash(userData.password, 7);
-    const newUser = this.userRepository.create({
-      ...userData,
-      password: hashedPassword,
-    });
-
-    await this.userRepository.save(newUser);
-
-    return newUser;
+    // const hashedPassword = await hash(userData.password, 7);
+    // const newUser = this.userRepository.create({
+    //   ...userData,
+    //   password: hashedPassword,
+    // });
+    // await this.userRepository.save(newUser);
+    //
+    // return newUser;
   }
 
   async getUsers() {
@@ -37,16 +36,15 @@ export class UserService {
     });
   }
 
-  async updateUserById(userId: number, userData: UpdateUserDto) {
-    const { email, role } = userData;
-
-    return await this.userRepository.update(
-      { userId },
-      {
-        email,
-        role,
-      },
-    );
+  async updateUserById(userId: number) {
+    // const { email, role } = userData;
+    // return await this.userRepository.update(
+    //   { userId },
+    //   {
+    //     email,
+    //     role,
+    //   },
+    // );
   }
 
   async deleteUserById(userId: number) {

@@ -15,7 +15,7 @@ import { Request, Response } from 'express';
 
 import { UserService } from '@entities/user/user.servise';
 
-import { UpdateUserDto } from '@entities/user/dto/updateUser.dto';
+// import { UpdateUserDto } from '@entities/user/dto/updateUser.dto';
 
 @Controller('/users')
 export class UserController {
@@ -49,16 +49,16 @@ export class UserController {
 
   @Put('/:id')
   async updateUserById(
-    @Body() body: UpdateUserDto,
+    // @Body() body: UpdateUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
     try {
-      const updatedUser = await this.userService.updateUserById(id, body);
-
-      return {
-        ...updatedUser,
-        userId: id,
-      };
+      // const updatedUser = await this.userService.updateUserById(id, body);
+      //
+      // return {
+      //   ...updatedUser,
+      //   userId: id,
+      // };
     } catch (err) {
       return { message: err.message };
     }
