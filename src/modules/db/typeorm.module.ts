@@ -14,7 +14,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: ['dist/entities/**/*.entity.js'],
+        entities: ['dist/modules/**/*.entity.js'],
         synchronize: true,
         // migrations: [ 'dist/db/migrations/**/*.js' ],
         // cli: { migrationsDir: 'src/db/migrations' },

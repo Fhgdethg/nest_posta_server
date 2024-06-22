@@ -11,8 +11,9 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@db/*": ["src/db/*"],
-      "@entities/*": ["src/entities/*"],
+      "@db/*": ["src/modules/db/*"],
+      "@modules/*": ["src/modules/*"],
+      "@withEntity/*": ["src/modules/withEntity/*"],
       "@constants/*": ["src/constants/*"]
     },
     "incremental": true,
