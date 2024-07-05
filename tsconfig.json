@@ -14,7 +14,8 @@
       "@db/*": ["src/modules/db/*"],
       "@modules/*": ["src/modules/*"],
       "@withEntity/*": ["src/modules/withEntity/*"],
-      "@constants/*": ["src/constants/*"]
+      "@constants/*": ["src/constants/*"],
+      "@globalTypes/*": ["src/types/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

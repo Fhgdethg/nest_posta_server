@@ -1,34 +1,86 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  BadRequestException,
+  Res,
+  Req,
+  NotFoundException,
+} from '@nestjs/common';
+import { Response } from 'express';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
+import { User } from '@withEntity/user/user.entity';
+
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+
+import { LoginReqDto, LoginResponseDto } from './dto/login.dto';
+import { UserResDto } from '@withEntity/user/dto/userRes.dto';
+
+import { routes } from '@constants/routes';
+import { apiTags } from '@constants/swaggerData';
+
+import { IModifyAuthRequest } from '@globalTypes/basic.types';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    private readonly authService: AuthService,
+  ) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @ApiTags(apiTags.auth)
+  @ApiOkResponse({
+    description: 'Successful login',
+    type: LoginResponseDto,
+  })
+  @Post(routes.login)
+  async login(@Body() loginDto: LoginReqDto, @Res() res: Response) {
+    const { email, password } = loginDto;
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (!user) throw new BadRequestException('User does not exist');
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch)
+      throw new BadRequestException('Email or password is not correct');
+
+    const token = this.authService.getToken(user._id);
+
+    res.cookie('authToken', token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+    });
+
+    delete user.password;
+
+    return res.send({ token, user });
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
+  @ApiTags(apiTags.auth)
+  @ApiOkResponse({
+    description: 'Token is valid',
+    type: UserResDto,
+  })
+  @Get(routes.auth)
+  async auth(@Req() req: IModifyAuthRequest) {
+    const { userID } = req;
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
+    if (!userID) throw new BadRequestException('Session was ended');
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
+    const user = await this.userRepository.findOne({
+      where: { _id: userID },
+    });
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+    if (!user) throw new NotFoundException('User was not founded');
+    delete user.password;
+
+    return user;
   }
 }

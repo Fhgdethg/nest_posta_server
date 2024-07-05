@@ -1,3 +1,6 @@
 export const routes = {
-  api: 'api',
+  swagger: 'swagger',
+  api: 'api/',
+  login: '/login',
+  auth: '/auth',
 };
