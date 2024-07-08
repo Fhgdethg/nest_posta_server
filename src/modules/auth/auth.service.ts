@@ -13,16 +13,23 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
+  private SECRET_KEY = this.configService.get<string>('SECRET_KEY');
+
   getToken(_id: ObjectId) {
-    const SECRET_KEY = this.configService.get<string>('SECRET_KEY');
     const EXPIRES_IN = this.configService.get<string>('EXPIRES_IN');
 
     return this.jwtService.sign(
       { _id },
       {
-        secret: SECRET_KEY,
+        secret: this.SECRET_KEY,
         expiresIn: EXPIRES_IN,
       },
     );
+  }
+
+  getTokenData(t: string) {
+    return this.jwtService.verify(t, {
+      secret: this.SECRET_KEY,
+    })._id;
   }
 }

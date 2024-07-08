@@ -15,7 +15,9 @@
       "@modules/*": ["src/modules/*"],
       "@withEntity/*": ["src/modules/withEntity/*"],
       "@constants/*": ["src/constants/*"],
-      "@globalTypes/*": ["src/types/*"]
+      "@globalTypes/*": ["src/types/*"],
+      "@strategies/*": ["src/strategies/*"],
+      "@guards/*": ["src/guards/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

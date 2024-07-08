@@ -7,22 +7,26 @@ import {
   Res,
   Req,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { User } from '@withEntity/user/user.entity';
 
 import { AuthService } from './auth.service';
+
+import { JwtGuard } from '@guards/jwt.guard';
 
 import { LoginReqDto, LoginResponseDto } from './dto/login.dto';
 import { UserResDto } from '@withEntity/user/dto/userRes.dto';
 
 import { routes } from '@constants/routes';
 import { apiTags } from '@constants/swaggerData';
+import { cookieKeys } from '@constants/cookieData';
 
 import { IModifyAuthRequest } from '@globalTypes/basic.types';
 
@@ -52,7 +56,7 @@ export class AuthController {
 
     const token = this.authService.getToken(user._id);
 
-    res.cookie('authToken', token, {
+    res.cookie(cookieKeys.authToken, token, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -68,11 +72,15 @@ export class AuthController {
     description: 'Token is valid',
     type: UserResDto,
   })
+  @ApiBearerAuth()
+  @UseGuards(JwtGuard)
   @Get(routes.auth)
   async auth(@Req() req: IModifyAuthRequest) {
-    const { userID } = req;
+    const token = req.cookies[cookieKeys.authToken];
 
-    if (!userID) throw new BadRequestException('Session was ended');
+    if (!token) throw new BadRequestException('Session was ended');
+
+    const userID = this.authService.getTokenData(token);
 
     const user = await this.userRepository.findOne({
       where: { _id: userID },

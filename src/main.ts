@@ -3,7 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 
-import { AppModule } from './app.module';
+import { AppModule } from '@modules/app.module';
 
 import { routes } from '@constants/routes';
 
@@ -17,6 +17,7 @@ async function bootstrap() {
     .setTitle('Store server')
     .setDescription('Backend for store system')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
