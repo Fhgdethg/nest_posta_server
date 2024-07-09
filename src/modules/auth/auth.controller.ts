@@ -43,7 +43,10 @@ export class AuthController {
     type: LoginResponseDto,
   })
   @Post(routes.login)
-  async login(@Body() loginDto: LoginReqDto, @Res() res: Response) {
+  async login(
+    @Body() loginDto: LoginReqDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
     const { email, password } = loginDto;
     const user = await this.userRepository.findOne({ where: { email } });
 
@@ -64,7 +67,7 @@ export class AuthController {
 
     delete user.password;
 
-    return res.send({ token, user });
+    return { token, user };
   }
 
   @ApiTags(apiTags.auth)
