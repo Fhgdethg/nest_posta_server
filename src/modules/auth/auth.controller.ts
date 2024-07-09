@@ -8,6 +8,8 @@ import {
   Req,
   NotFoundException,
   UseGuards,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { Repository } from 'typeorm';
@@ -41,8 +43,10 @@ export class AuthController {
   @ApiOkResponse({
     description: 'Successful login',
     type: LoginResponseDto,
+    status: HttpStatus.OK,
   })
   @Post(routes.login)
+  @HttpCode(HttpStatus.OK)
   async login(
     @Body() loginDto: LoginReqDto,
     @Res({ passthrough: true }) res: Response,

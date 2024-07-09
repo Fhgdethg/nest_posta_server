@@ -8,6 +8,8 @@ import {
   Delete,
   UseGuards,
   ParseIntPipe,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
@@ -32,10 +34,12 @@ export class ShelveController {
   @ApiOkResponse({
     description: 'Shelve has just created',
     type: ShelveResponseDto,
+    status: HttpStatus.CREATED,
   })
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   async create(@Body() createShelveDto: CreateShelveDto) {
     await this.shelveService.checkIsShelveExist(createShelveDto.shelveID);
     return await this.shelveService.create(createShelveDto);
@@ -94,10 +98,12 @@ export class ShelveController {
   @ApiTags(apiTags.shelves)
   @ApiOkResponse({
     description: 'Shelve has deleted successfully',
+    status: HttpStatus.NO_CONTENT,
   })
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.shelveService.remove(id);
   }
