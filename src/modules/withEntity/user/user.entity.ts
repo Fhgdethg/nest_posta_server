@@ -1,6 +1,8 @@
 import { Column, Entity, ObjectId, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('users')
+import { entities } from '@constants/entities';
+
+@Entity(entities.users)
 export class User {
   @PrimaryGeneratedColumn('uuid')
   _id: ObjectId;

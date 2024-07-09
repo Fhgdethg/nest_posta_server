@@ -30,7 +30,7 @@ import { cookieKeys } from '@constants/cookieData';
 
 import { IModifyAuthRequest } from '@globalTypes/basic.types';
 
-@Controller('auth')
+@Controller(routes.auth)
 export class AuthController {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,

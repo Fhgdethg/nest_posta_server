@@ -3,4 +3,7 @@ export const routes = {
   api: 'api/',
   login: '/login',
   auth: '/auth',
+  shelves: '/shelves',
+  allIDs: '/all-ids',
+  qID: '/:id',
 };
