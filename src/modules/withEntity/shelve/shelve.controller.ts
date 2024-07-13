@@ -102,7 +102,7 @@ export class ShelveController {
   })
   @ApiBearerAuth()
   @UseGuards(JwtGuard)
-  @Delete(':id')
+  @Delete(routes.qID)
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id', ParseIntPipe) id: number) {
     return await this.shelveService.remove(id);

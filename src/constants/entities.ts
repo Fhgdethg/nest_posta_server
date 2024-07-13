@@ -5,4 +5,5 @@ export const entities = {
   shelveCoordinates: 'shelve_coordinates',
   products: 'products',
   productDimensions: 'product_dimensions',
+  reports: 'reports',
 };

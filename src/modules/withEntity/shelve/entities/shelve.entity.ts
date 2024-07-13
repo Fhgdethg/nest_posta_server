@@ -30,16 +30,3 @@ export class Shelve {
   @Column({ type: 'simple-array', nullable: false, default: [] })
   products: number[];
 }
-
-// shelveID: { type: Number, required: true, unique: true },
-// shelveDimensions: {
-//   width: { type: Number, required: true },
-//   height: { type: Number, required: true },
-//   length: { type: Number, required: true },
-// },
-// coordinates: {
-//   x: { type: Number, required: true },
-//   y: { type: Number, required: true },
-// },
-// percentBusyVolume: { type: Number, required: true, default: 0 },
-// products: [{ type: Number, ref: 'Product' }],

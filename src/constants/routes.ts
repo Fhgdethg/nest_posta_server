@@ -6,4 +6,7 @@ export const routes = {
   shelves: '/shelves',
   allIDs: '/all-ids',
   qID: '/:id',
+  reports: '/reports',
+  byUserID: '/by-user-id',
+  byIDs: '/by-ids',
 };

@@ -12,13 +12,13 @@ import { AuthModule } from '@modules/auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    AuthModule,
     TypeOrmModule,
     UserModule,
     ShelveModule,
     ProductModule,
     ReportModule,
     ChatMessageModule,
-    AuthModule,
   ],
 })
 export class AppModule {}
