@@ -6,7 +6,7 @@ import { UserModule } from '@withEntity/user/user.module';
 import { ShelveModule } from '@withEntity/shelve/shelve.module';
 import { ProductModule } from '@withEntity/product/product.module';
 import { ReportModule } from '@withEntity/report/report.module';
-import { ChatMessageModule } from '@withEntity/chat-message/chat-message.module';
+import { ChatMessageModule } from '@withEntity/chatMessage/chatMessage.module';
 import { AuthModule } from '@modules/auth/auth.module';
 
 @Module({

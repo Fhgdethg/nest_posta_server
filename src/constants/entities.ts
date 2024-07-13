@@ -6,4 +6,5 @@ export const entities = {
   products: 'products',
   productDimensions: 'product_dimensions',
   reports: 'reports',
+  chatMessage: 'chat_message',
 };
