@@ -1,14 +1,6 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  ObjectId,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ObjectId, PrimaryGeneratedColumn } from 'typeorm';
 
 import { ProductDimensions } from '@withEntity/product/entities/productDimensions.entity';
-import { Shelve } from '@withEntity/shelve/entities/shelve.entity';
 
 import { entities } from '@constants/entities';
 

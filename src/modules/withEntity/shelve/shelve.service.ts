@@ -137,7 +137,7 @@ export class ShelveService {
 
     await this.shelveRepository.delete({ shelveID });
 
-    if (shelve?.products)
+    if (shelve?.products.length)
       await this.productRepository.delete({ productID: In(shelve.products) });
 
     return;

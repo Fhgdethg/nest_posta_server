@@ -9,14 +9,18 @@ import {
   UseGuards,
   ParseIntPipe,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
 import { ProductService } from './product.service';
+
 import {
   CreateAndReadProductDto,
   ProductResDto,
 } from './dto/createAndReadProduct.dto';
-import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { apiTags } from '@constants/swaggerData';
+
 import { JwtGuard } from '@guards/jwt.guard';
+
+import { apiTags } from '@constants/swaggerData';
 import { routes } from '@constants/routes';
 
 @Controller(routes.products)
