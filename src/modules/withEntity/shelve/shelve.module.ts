@@ -19,5 +19,6 @@ import { Product } from '@withEntity/product/entities/product.entity';
   ],
   controllers: [ShelveController],
   providers: [ShelveService],
+  exports: [ShelveService],
 })
 export class ShelveModule {}

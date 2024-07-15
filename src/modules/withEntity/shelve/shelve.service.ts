@@ -142,4 +142,24 @@ export class ShelveService {
 
     return;
   }
+
+  getNewPercentBusyVolume(
+    oldPercentBusyVolume: number,
+    shelveWidth: number,
+    shelveHeight: number,
+    shelveLength: number,
+    productWidth: number,
+    productHeight: number,
+    productLength: number,
+    productAction: 'add' | 'remove',
+  ) {
+    const shelveVolume = shelveWidth * shelveHeight * shelveLength;
+    const productVolume = productWidth * productHeight * productLength;
+
+    const productBusyPlace = (productVolume * 100) / shelveVolume;
+
+    if (productAction === 'add')
+      return Math.round(oldPercentBusyVolume + productBusyPlace);
+    else return Math.round(oldPercentBusyVolume - productBusyPlace);
+  }
 }

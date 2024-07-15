@@ -1,5 +1,6 @@
 export const routes = {
   swagger: 'swagger',
+  root: '/',
   api: 'api/',
   login: '/login',
   auth: '/auth',
@@ -9,4 +10,5 @@ export const routes = {
   reports: '/reports',
   byUserID: '/by-user-id',
   byIDs: '/by-ids',
+  products: '/products',
 };

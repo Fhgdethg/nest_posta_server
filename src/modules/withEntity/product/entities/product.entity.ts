@@ -28,28 +28,33 @@ export class Product {
   @Column({
     name: 'product_title',
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   productTitle: string;
 
   @Column({
     name: 'product_description',
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   productDescription: string;
 
   @Column({
     name: 'product_img_url',
     type: 'varchar',
-    nullable: false,
+    nullable: true,
   })
   productImgUrl: string;
 
   @Column(() => ProductDimensions)
   productDimensions: ProductDimensions;
 
-  @ManyToOne(() => Shelve, (shelve) => shelve.products, { nullable: false })
-  @JoinColumn({ name: 'shelveID' })
+  // @ManyToOne(() => Shelve, (shelve) => shelve.products, { nullable: false })
+  // @JoinColumn({ name: 'shelveID' })
+  @Column({
+    name: 'shelve_id',
+    type: 'integer',
+    nullable: false,
+  })
   shelveID: number;
 }
