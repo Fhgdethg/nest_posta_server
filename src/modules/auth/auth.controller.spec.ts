@@ -1,10 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcrypt';
+import { getRepositoryToken } from '@nestjs/typeorm';
+
+import { User } from '@withEntity/user/user.entity';
+
+import { AuthController } from '@modules/auth/auth.controller';
 
 import { AuthService } from './auth.service';
-import { AuthController } from '@modules/auth/auth.controller';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '@withEntity/user/user.entity';
+
 import { cookieKeys } from '@constants/cookieData';
 
 describe('AuthService', () => {
