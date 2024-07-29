@@ -1,0 +1,13 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "^@db/(.*)$": "<rootDir>/src/modules/db/$1",
+    "^@modules/(.*)$": "<rootDir>/src/modules/$1",
+    "^@withEntity/(.*)$": "<rootDir>/src/modules/withEntity/$1",
+    "^@constants/(.*)$": "<rootDir>/src/constants/$1",
+    "^@globalTypes/(.*)$": "<rootDir>/src/types/$1",
+    "^@strategies/(.*)$": "<rootDir>/src/strategies/$1",
+    "^@guards/(.*)$": "<rootDir>/src/guards/$1"
+  }
+}
